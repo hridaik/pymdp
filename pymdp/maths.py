@@ -297,11 +297,13 @@ def spm_norm(A):
     normed_A = np.divide(A, A.sum(axis=0))
     return normed_A
 
+import math
+
 def spm_log_single(arr):
     """
     Adds small epsilon value to an array before natural logging it
     """
-    return np.log(arr + EPS_VAL)
+    return np.log(arr.astype(np.float64) + EPS_VAL)
 
 def spm_log_obj_array(obj_arr):
     """
