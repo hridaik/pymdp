@@ -50,6 +50,7 @@ class Agent(object):
         alpha=16.0,
         use_utility=True,
         use_states_info_gain=True,
+        k_ig = 1.0,
         use_param_info_gain=False,
         action_selection="deterministic",
         sampling_mode = "marginal", # whether to sample from full posterior over policies ("full") or from marginal posterior over actions ("marginal")
@@ -84,6 +85,7 @@ class Agent(object):
         self.sampling_mode = sampling_mode
         self.use_utility = use_utility
         self.use_states_info_gain = use_states_info_gain
+        self.k_ig = k_ig
         self.use_param_info_gain = use_param_info_gain
 
         # learning parameters
@@ -657,7 +659,8 @@ class Agent(object):
                     self.pB,
                     E = self.E,
                     I = self.I,
-                    gamma = self.gamma
+                    gamma = self.gamma,
+                    k_ig = self.k_ig
                 )
         elif self.inference_algo == "MMP":
 

@@ -376,7 +376,8 @@ def update_posterior_policies_factorized(
     pB=None,
     E=None,
     I=None,
-    gamma=16.0
+    gamma=16.0,
+    k_ig=1.0
 ):
     """
     Update posterior beliefs about policies by computing expected free energy of each policy and integrating that
@@ -452,7 +453,7 @@ def update_posterior_policies_factorized(
             G[idx] += calc_expected_utility(qo_pi, C)
 
         if use_states_info_gain:
-            G[idx] += calc_states_info_gain_factorized(A, qs_pi, A_factor_list)
+            G[idx] += k_ig*calc_states_info_gain_factorized(A, qs_pi, A_factor_list)
 
         if use_param_info_gain:
             if pA is not None:
